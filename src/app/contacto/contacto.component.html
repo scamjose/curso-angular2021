@@ -1,0 +1,37 @@
+<div class="contacto-container">
+    <div class="contacto-form" [formGroup]="formContacto">
+
+        <mat-form-field>
+            <mat-label>Nombre</mat-label>
+            <input matInput type="text" placeholder="Nombre" formControlName="nombre"/>
+            <mat-error *ngIf="formContacto.get('nombre')?.errors?.required">
+                El nombre es requerido
+            </mat-error>
+        </mat-form-field>
+        
+        <mat-form-field>
+            <mat-label>Correo</mat-label>
+            <input matInput type="text" placeholder="Correo" formControlName="correo">
+            <mat-error *ngIf="formContacto.get('correo')?.errors?.email">
+                Introduce un correo valido
+            </mat-error>
+            <mat-error *ngIf="formContacto.get('correo')?.errors?.required">
+                El correo es requerido
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Mensaje</mat-label>
+            <input matInput type="textarea" placeholder="Mensaje" formControlName="mensaje"/>
+            <mat-error *ngIf="formContacto.get('mensaje')?.errors?.required">
+                El mensaje es requerido
+            </mat-error>
+            <mat-error *ngIf="formContacto.get('mensaje')?.errors?.maxlength">
+                Limite maximo de 10 caracteres
+            </mat-error>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" (click)="contacto()" [disabled]="formContacto.invalid">Enviar</button>
+
+    </div>
+</div>
