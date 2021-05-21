@@ -21,7 +21,7 @@
                 La contraseña es requerida
             </mat-error>
         </mat-form-field>
-        <button mat-raised-button color="primary" (click)="login()" [disabled]="formLogin.invalid">Ingresar</button>
+        <button mat-raised-button color="primary" (click)="login()" [disabled]="formLogin.invalid || disableButton">Ingresar</button>
     </div>
 </div>
 
