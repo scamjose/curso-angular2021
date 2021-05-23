@@ -27,4 +27,8 @@ export class RopaService {
     return this.http.post('https://super-rest.herokuapp.com/test/ropa',item);
   }
 
+  deleteRopa(id:string):Observable<any>{
+    return this.http.delete('https://super-rest.herokuapp.com/test/ropa/'+id);
+  }
+
 }

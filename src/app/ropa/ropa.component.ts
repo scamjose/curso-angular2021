@@ -16,6 +16,7 @@ export class RopaComponent implements OnInit {
   disableButton=false;
   id:string='';
   title='Crear elemento';
+  titleB='Guardar'
 
   constructor(private formBuilder: FormBuilder,
     private ropaService:RopaService,
@@ -44,7 +45,6 @@ export class RopaComponent implements OnInit {
         });
       }
     });
-
   }
 
   ngOnInit(): void {

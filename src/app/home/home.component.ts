@@ -12,9 +12,16 @@ import { RopaService } from '../services/ropa.service';
 })
 export class HomeComponent implements OnInit {
   dataSource= new MatTableDataSource<Ropa>();
-  columns=['talla','color','categoria','actions'];
+  columns=['talla','color','categoria','actions','delete'];
 
   constructor(private dataService: DataService, private ropa:RopaService,private router:Router) {
+    this.load();
+   }
+
+  ngOnInit(): void {
+  }
+
+  load():void{
     this.dataService.isLoading.next(true);
     this.ropa.getRopa().subscribe(ropa=>{
       this.dataSource.data=ropa;
@@ -24,9 +31,6 @@ export class HomeComponent implements OnInit {
       this.dataService.message.next('Lo sentimos, no se pudieron cargar los elementos')
       //alert('Lo sentimos, no se pudieron cargar los elementos')
     });
-   }
-
-  ngOnInit(): void {
   }
 
   edit(item:Ropa):void{
@@ -36,5 +40,20 @@ export class HomeComponent implements OnInit {
 
   newItem():void{
     this.router.navigate(['ropa']);
+    }
+
+  deleteItem(id:string):void{
+      this.dataService.isLoading.next(true);
+
+      this.ropa.deleteRopa(id).subscribe(del=>{
+        this.dataService.message.next("Elemento borrado");
+
+        this.load();
+      
+        this.dataService.isLoading.next(false);
+      },()=>{
+        this.dataService.isLoading.next(false);
+        this.dataService.message.next("Ocurrio un error");
+      });
     }
 }
